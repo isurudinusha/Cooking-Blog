@@ -1,5 +1,6 @@
 require("../models/database");
 const Category = require("../models/Category");
+const Recipe = require("../models/Recipe");
 
 /**
  * GET /
@@ -13,6 +14,25 @@ exports.homepage = async (req, res) => {
 
     res.render("index", {
       title: "Cooking Blog - Home",
+      categories,
+    });
+  } catch (error) {
+    res.satus(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+/**
+ * GET /categories
+ * Categories
+ */
+
+exports.exploreCategories = async (req, res) => {
+  try {
+    const limitNumber = 20;
+    const categories = await Category.find({}).limit(limitNumber);
+
+    res.render("categories", {
+      title: "Cooking Blog - Categories",
       categories,
     });
   } catch (error) {
