@@ -51,6 +51,27 @@ exports.exploreCategories = async (req, res) => {
   }
 };
 
+/**
+ * GET /recipe:id
+ * Recipe
+ */
+
+exports.exploreRecipe = async (req, res) => {
+  try {
+
+    let recipeId = req.params.id;
+    const recipe = await Recipe.findById(recipeId);
+
+
+    res.render("recipe", {
+      title: "Cooking Blog - Recipe",
+      recipe,
+    });
+  } catch (error) {
+    res.satus(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
 // async function insertDymmyRecipeData() {
 //   try {
 //     await Recipe.insertMany([
