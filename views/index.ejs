@@ -38,9 +38,8 @@
   <a
     href="/categories/<%= categories[i].name %>"
     class="col text-center category__link"
-    data-aos="slide-right"
   >
-    <div class="category__img shadow">
+    <div class="category__img shadow" data-aos="slide-right">
       <img
         src="/img/<%= categories[i].image %>"
         alt="<%= categories[i].name %>"
@@ -51,12 +50,8 @@
   </a>
   <% } } %>
 
-  <a
-    href="/categories"
-    data-aos="slide-right"
-    class="col text-center category__link"
-  >
-    <div class="category__img shadow">
+  <a href="/categories" class="col text-center category__link">
+    <div class="category__img shadow" data-aos="slide-right">
       <img src="/img/view-all.jpg" alt="View All Categories" loading="lazy" />
     </div>
     <div class="pt-1">View All</div>
@@ -74,12 +69,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.latest.forEach(function (recipe, i) { %>
-    <a
-      href="/recipe/<%= recipe._id %>"
-      data-aos="flip-left"
-      class="col text category__link"
-    >
-      <div class="category__img category__img--large shadow">
+    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+      <div
+        class="category__img category__img--large shadow"
+        data-aos="flip-left"
+      >
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
@@ -103,12 +97,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.thai.forEach(function (recipe, i) { %>
-    <a
-      href="/recipe/<%= recipe._id %>"
-      data-aos="flip-right"
-      class="col text category__link"
-    >
-      <div class="category__img category__img--large shadow">
+    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+      <div
+        class="category__img category__img--large shadow"
+        data-aos="flip-right"
+      >
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
@@ -132,12 +125,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.chinese.forEach(function (recipe, i) { %>
-    <a
-      href="/recipe/<%= recipe._id %>"
-      data-aos="flip-left"
-      class="col text category__link"
-    >
-      <div class="category__img category__img--large shadow">
+    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+      <div
+        class="category__img category__img--large shadow"
+        data-aos="flip-left"
+      >
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
@@ -161,12 +153,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.american.forEach(function (recipe, i) { %>
-    <a
-      href="/recipe/<%= recipe._id %>"
-      data-aos="flip-right"
-      class="col text category__link"
-    >
-      <div class="category__img category__img--large shadow">
+    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+      <div
+        class="category__img category__img--large shadow"
+        data-aos="flip-right"
+      >
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"

@@ -2,12 +2,11 @@
 
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
   <% if (recipe != '') { %> <% recipe.forEach(function (recipe, i) { %>
-  <a
-    href="/recipe/<%= recipe._id %>"
-    data-aos="flip-right"
-    class="col text category__link"
-  >
-    <div class="category__img category__img--large shadow">
+  <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+    <div
+      class="category__img category__img--large shadow"
+      data-aos="flip-right"
+    >
       <img
         src="/uploads/<%= recipe.image %>"
         alt="<%= recipe.name %>"

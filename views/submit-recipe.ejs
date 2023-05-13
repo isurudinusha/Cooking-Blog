@@ -1,0 +1,97 @@
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Share your recipe with the world! Fill our form and get statred!
+    </p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" />
+        </div>
+        <div class="col-12">
+          <label for="email" class="form-label">Recipe Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="recipeName"
+            name="recipeName"
+          />
+        </div>
+        <div class="col-12">
+          <label for="email" class="form-label">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="4"
+            class="form-control"
+          ></textarea>
+        </div>
+
+        <div class="col-12">
+          <label for="email" class="form-label">Ingredients</label><br />
+          <small>Example: Water</small>
+          <div class="ingredeintsList">
+            <div class="ingredeintDiv mb-1">
+              <input
+                type="text"
+                class="form-control"
+                id="ingredients"
+                name="ingredients"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            id="addIngredientsBtn"
+          >
+            + Ingredients
+          </button>
+        </div>
+        <div class="col-12">
+          <label for="category" class="form-label">Select a Category</label>
+          <select class="form-select" id="category" name="category">
+            <option selected>Select a Category</option>
+            <option value="American">American</option>
+            <option value="Thai">Thai</option>
+            <option value="Indian">Indian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Mexican">Mexican</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label for="image">Product Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="image"
+            name="image"
+            accept="image/*"
+          />
+        </div>
+
+        <div class="col-12">
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mt-3 mb-3"
+            id="submit"
+          >
+            Submit Recipe
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

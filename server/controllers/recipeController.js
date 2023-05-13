@@ -119,6 +119,74 @@ exports.searchRecipe = async (req, res) => {
 
 };
 
+/**
+ * GET /explore-latest
+ * Explore Latest
+ */
+
+
+exports.exploreLatest = async (req, res) => {
+  try {
+
+    const limitNumber = 20;
+    const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber);
+
+
+    res.render("explore-latest", {
+      title: "Cooking Blog - Explore Latest",
+      recipe
+    });
+  } catch (error) {
+    res.satus(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+/**
+ * GET /random-recipe
+ * Random Recipe
+ */
+
+
+exports.randomRecipe = async (req, res) => {
+  try {
+
+
+    let count = await Recipe.find().countDocuments();
+    let random = Math.floor(Math.random() * count);
+    let recipe = await Recipe.findOne().skip(random).limit(1);
+
+    res.render("random-recipe", {
+      title: "Cooking Blog - Random Recipe",
+      recipe
+    });
+  } catch (error) {
+    res.satus(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+
+/**
+ * GET /submit-recipe
+ * Submit Recipe
+ */
+
+
+exports.submitRecipe = async (req, res) => {
+  try {
+
+
+    let count = await Recipe.find().countDocuments();
+    let random = Math.floor(Math.random() * count);
+    let recipe = await Recipe.findOne().skip(random).limit(1);
+
+    res.render("submit-recipe", {
+      title: "Cooking Blog - Submit Recipe",
+      recipe
+    });
+  } catch (error) {
+    res.satus(500).send({ message: error.message || "Something went wrong" });
+  }
+};
 // async function insertDymmyRecipeData() {
 //   try {
 //     await Recipe.insertMany([

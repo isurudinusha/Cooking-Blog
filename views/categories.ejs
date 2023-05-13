@@ -18,9 +18,8 @@
   <a
     href="/categories/<%= categories[i].name %>"
     class="col text-center category__link"
-    data-aos="flip-left"
   >
-    <div class="category__img shadow">
+    <div class="category__img shadow" data-aos="flip-left">
       <img
         src="/img/<%= categories[i].image %>"
         alt="<%= categories[i].name %>"
@@ -35,12 +34,8 @@
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
   <% if ( typeof categoryById !== 'undefined' && categoryById.length > 0) { %>
   <% categoryById.forEach(function (recipe, i) { %>
-  <a
-    href="/recipe/<%= recipe._id %>"
-    data-aos="flip-left"
-    class="col text category__link"
-  >
-    <div class="category__img category__img--large shadow">
+  <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+    <div class="category__img category__img--large shadow" data-aos="flip-left">
       <img
         src="/uploads/<%= recipe.image %>"
         alt="<%= recipe.name %>"
