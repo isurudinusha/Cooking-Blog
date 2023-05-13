@@ -38,6 +38,7 @@
   <a
     href="/categories/<%= categories[i].name %>"
     class="col text-center category__link"
+    data-aos="slide-right"
   >
     <div class="category__img shadow">
       <img
@@ -50,7 +51,11 @@
   </a>
   <% } } %>
 
-  <a href="/categories" class="col text-center category__link">
+  <a
+    href="/categories"
+    data-aos="slide-right"
+    class="col text-center category__link"
+  >
     <div class="category__img shadow">
       <img src="/img/view-all.jpg" alt="View All Categories" loading="lazy" />
     </div>
@@ -69,7 +74,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.latest.forEach(function (recipe, i) { %>
-    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+    <a
+      href="/recipe/<%= recipe._id %>"
+      data-aos="flip-left"
+      class="col text category__link"
+    >
       <div class="category__img category__img--large shadow">
         <img
           src="/uploads/<%= recipe.image %>"
@@ -94,7 +103,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.thai.forEach(function (recipe, i) { %>
-    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+    <a
+      href="/recipe/<%= recipe._id %>"
+      data-aos="flip-right"
+      class="col text category__link"
+    >
       <div class="category__img category__img--large shadow">
         <img
           src="/uploads/<%= recipe.image %>"
@@ -119,7 +132,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.chinese.forEach(function (recipe, i) { %>
-    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+    <a
+      href="/recipe/<%= recipe._id %>"
+      data-aos="flip-left"
+      class="col text category__link"
+    >
       <div class="category__img category__img--large shadow">
         <img
           src="/uploads/<%= recipe.image %>"
@@ -144,7 +161,11 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.american.forEach(function (recipe, i) { %>
-    <a href="/recipe/<%= recipe._id %>" class="col text category__link">
+    <a
+      href="/recipe/<%= recipe._id %>"
+      data-aos="flip-right"
+      class="col text category__link"
+    >
       <div class="category__img category__img--large shadow">
         <img
           src="/uploads/<%= recipe.image %>"
@@ -170,6 +191,7 @@
     loading="lazy"
     width="566"
     height="200"
+    data-aos="fade-in"
   />
   <h1 class="display-5 fw-bold">Publish your recipe for FREE today!</h1>
   <div class="col-lg-6 mx-auto">
