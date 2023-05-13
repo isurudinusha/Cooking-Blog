@@ -65,7 +65,7 @@ exports.exploreRecipe = async (req, res) => {
 
     res.render("recipe", {
       title: "Cooking Blog - Recipe",
-      recipe,
+      recipe
     });
   } catch (error) {
     res.satus(500).send({ message: error.message || "Something went wrong" });
@@ -94,6 +94,29 @@ exports.exploreCategoriesById = async (req, res) => {
   } catch (error) {
     res.satus(500).send({ message: error.message || "Something went wrong" });
   }
+};
+
+/**
+ * POST /search
+ * Search
+ */
+
+
+exports.searchRecipe = async (req, res) => {
+
+
+  try {
+    let searchTerm = req.body.searchTerm;
+    let recipe = await Recipe.find({ $text: { $search: searchTerm, $diacriticSensitive: true } });
+    res.render("search", {
+      title: "Cooking Blog - Search",
+      recipe
+    });
+  } catch (error) {
+    res.satus(500).send({ message: error.message || "Something went wrong" });
+  }
+
+
 };
 
 // async function insertDymmyRecipeData() {
