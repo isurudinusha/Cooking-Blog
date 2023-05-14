@@ -14,9 +14,17 @@ router.post("/search", recipeController.searchRecipe);
 router.get("/explore-latest", recipeController.exploreLatest);
 router.get("/random-recipe", recipeController.randomRecipe);
 router.get("/submit-recipe/:id", recipeController.submitRecipe);
-router.get("/submit-recipe/", recipeController.submitRecipe);
+router.get("/submit-recipe", recipeController.submitRecipe);
 router.post("/submit-recipe", recipeController.submitRecipeOnPost);
 router.get("/delete-recipe/:id", recipeController.deleteRecipe);
+router.get("/about", recipeController.about);
+router.get("/contact", recipeController.contact);
+router.post("/contact", recipeController.contactSendMail);
+
+
+
+
+
 
 
 

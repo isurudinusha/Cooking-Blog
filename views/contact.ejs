@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-sm-12">
+    <div class="form-container">
+      <form action="/contact" method="POST" class="contact-form">
+        <h1 class="pb-4 d-flex justify-content-center">Contact Us</h1>
+        <input
+          type="text"
+          placeholder="Full Name"
+          class="form-control"
+          name="name"
+          id="name"
+        /><br />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Email"
+          name="email"
+          id="email"
+        /><br />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Subject"
+          name="subject"
+          id="subject"
+        /><br />
+        <textarea
+          name="message"
+          placeholder="Message"
+          class="form-control"
+          id="message"
+          cols="30"
+          rows="10"
+        ></textarea
+        ><br />
+        <input
+          type="submit"
+          id="send-btn"
+          class="btn btn-primary"
+          value="Send Message"
+        />
+      </form>
+    </div>
+  </div>
+</div>

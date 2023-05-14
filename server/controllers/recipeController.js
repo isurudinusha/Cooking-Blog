@@ -1,7 +1,7 @@
 require("../models/database");
 const Category = require("../models/Category");
 const Recipe = require("../models/Recipe");
-
+const nodemailer = require("nodemailer");
 /**
  * GET /
  * Homepage
@@ -309,6 +309,83 @@ async function updateReceipeData(id, req, res) {
     console.log(error);
   }
 }
+
+/**
+ * GET /about
+ * About
+ */
+
+
+exports.about = async (req, res) => {
+  try {
+
+    res.render("about", {
+      title: "Cooking Blog - About",
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+/**
+ * GET /contact
+ * Contact
+ */
+
+
+
+exports.contact = async (req, res) => {
+
+  try {
+
+    res.render("contact", {
+      title: "Cooking Blog - Contact",
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+exports.contactSendMail = async (req, res) => {
+
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+
+  try {
+
+    const transporter = nodemailer.createTransport({
+      host: 'live.smtp.mailtrap.io',
+      port: 587,
+      auth: {
+        user: 'api',
+        pass: '6c22efb89745c857672d859e11f28b66'
+      }
+    });
+
+    const mailOptions = {
+      from: req.body.email,
+      to: 'isurucookingblog@gmail.com',
+      subject: 'Hello from Node.js',
+      text: 'This is the email body.'
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('Error occurred while sending email:', error.message);
+      } else {
+        console.log('Email sent successfully!', info.response);
+      }
+    });
+
+    res.redirect("/");
+
+
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+
 
 // async function insertDymmyRecipeData() {
 //   try {
