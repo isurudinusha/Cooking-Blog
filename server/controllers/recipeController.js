@@ -336,10 +336,18 @@ exports.about = async (req, res) => {
 
 exports.contact = async (req, res) => {
 
+
+  const infoErrorsObj = req.flash('infoErrors');
+  const infoSubmitObj = req.flash('infoSubmit');
+
+
   try {
 
     res.render("contact", {
       title: "Cooking Blog - Contact",
+      infoErrorsObj,
+      infoSubmitObj
+
     });
   } catch (error) {
     res.status(500).send({ message: error.message || "Something went wrong" });
@@ -348,37 +356,48 @@ exports.contact = async (req, res) => {
 
 exports.contactSendMail = async (req, res) => {
 
+  const { name, email, message } = req.body;
+
+
+
   try {
 
-    const transporter = nodemailer.createTransport({
-      host: 'live.smtp.mailtrap.io',
-      port: 587,
-      auth: {
-        user: 'api',
-        pass: '6c22efb89745c857672d859e11f28b66'
-      }
-    });
+    if (!name || !email || !message) {
+      req.flash('infoErrors', "Please fill out all required fields.");
+      res.redirect("/contact");
+    } else {
+      const transporter = nodemailer.createTransport({
+        host: 'live.smtp.mailtrap.io',
+        port: 587,
+        auth: {
+          user: 'api',
+          pass: '6c22efb89745c857672d859e11f28b66'
+        }
+      });
 
-    const mailOptions = {
-      from: "contact@isurucookingblog.uk",
-      to: 'isurucookingblog@gmail.com',
-      subject: `Message from ${req.body.name}: ${req.body.email}`,
-      text: req.body.message
-    };
+      const mailOptions = {
+        from: "contact@isurucookingblog.uk",
+        to: 'isurucookingblog@gmail.com',
+        subject: "Isuru Cooking Blog Contact",
+        text: "Name: " + req.body.name + "\n" + "Email: " + req.body.email + "\n" + "Message: " + req.body.message
+      };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log('Error occurred while sending email:', error.message);
-      } else {
-        console.log('Email sent successfully!', info.response);
-      }
-    });
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          req.flash('infoErrors', "Error: " + error.message);
+          res.redirect("/contact");
+        } else {
+          req.flash('infoSubmit', "Your message has been sent!");
+          res.redirect("/contact");
+        }
+      });
+    }
 
-    res.redirect("/");
 
 
   } catch (error) {
-    res.status(500).send({ message: error.message || "Something went wrong" });
+    req.flash('infoErrors', "Error: " + error.message);
+    res.redirect("/contact");
   }
 };
 

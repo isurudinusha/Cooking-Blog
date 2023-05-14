@@ -15,11 +15,3 @@ removeIngredientsBtn.addEventListener("click", () => {
     }
 });
 
-
-let contactForm = document.querySelector(".contact-form");
-let name = document.getElementById("name");
-let email = document.getElementById("email");
-let subject = document.getElementById("subject");
-let message = document.getElementById("message");
-let send = document.getElementById("send-btn");
-

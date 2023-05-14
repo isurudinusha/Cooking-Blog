@@ -3,19 +3,31 @@
     <div class="form-container">
       <form action="/contact" method="POST" class="contact-form">
         <h1 class="pb-4 d-flex justify-content-center">Contact Us</h1>
+        <% if(infoSubmitObj != '') { %>
+        <div class="col-12 alert alert-success" role="alert">
+          <%= infoSubmitObj%>
+        </div>
+        <% } %> <% if(infoErrorsObj != '') { %>
+        <div class="col-12 alert alert-danger" role="alert">
+          <%= infoErrorsObj%>
+        </div>
+        <% } %>
         <input
           type="text"
           placeholder="Full Name"
           class="form-control"
           name="name"
           id="name"
+          required
         /><br />
         <input
-          type="text"
+          type="email"
           class="form-control"
           placeholder="Email"
           name="email"
           id="email"
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
         /><br />
         <input
           type="text"
@@ -23,6 +35,7 @@
           placeholder="Subject"
           name="subject"
           id="subject"
+          required
         /><br />
         <textarea
           name="message"
@@ -31,6 +44,7 @@
           id="message"
           cols="30"
           rows="10"
+          required
         ></textarea
         ><br />
         <input
