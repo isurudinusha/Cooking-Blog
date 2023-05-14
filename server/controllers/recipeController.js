@@ -175,18 +175,20 @@ exports.submitRecipe = async (req, res) => {
 
   const infoErrorsObj = req.flash('infoErrors');
   const infoSubmitObj = req.flash('infoSubmit');
-
-
+  const recipeId = req.params.id
 
   try {
+    let recipe = await Recipe.findById(recipeId);
     res.render("submit-recipe", {
       title: "Cooking Blog - Submit Recipe",
       infoErrorsObj,
-      infoSubmitObj
+      infoSubmitObj,
+      recipe
     });
   } catch (error) {
     res.status(500).send({ message: error.message || "Something went wrong" });
   }
+
 };
 
 /**
@@ -203,31 +205,40 @@ exports.submitRecipeOnPost = async (req, res) => {
     let uploadPath;
     let newImageName;
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No files were uploaded.');
+    if (req.body.recipeId == "") {
+      if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No product image were uploaded.');
+      } else {
+        imageUploadFile = req.files.image;
+        newImageName = Date.now() + imageUploadFile.name;
+        uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+        imageUploadFile.mv(uploadPath, function (err) {
+          if (err) {
+            return res.status(500).send(err);
+          }
+        })
+      }
+
+      const newRecipe = new Recipe({
+        name: req.body.name,
+        description: req.body.description,
+        email: req.body.email,
+        ingredients: req.body.ingredients,
+        category: req.body.category,
+        image: newImageName,
+      });
+
+      await newRecipe.save();
+
+      req.flash('infoSubmit', "Recipe Submitted Successfully!");
     } else {
-      imageUploadFile = req.files.image;
-      newImageName = Date.now() + imageUploadFile.name;
-      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
-      imageUploadFile.mv(uploadPath, function (err) {
-        if (err) {
-          return res.status(500).send(err);
-        }
-      })
+      updateReceipeData(req.body.recipeId, req, res);
+      req.flash('infoSubmit', "Recipe Updated Successfully!");
     }
 
-    const newRecipe = new Recipe({
-      name: req.body.name,
-      description: req.body.description,
-      email: req.body.email,
-      ingredients: req.body.ingredients,
-      category: req.body.category,
-      image: newImageName,
-    });
 
-    await newRecipe.save();
 
-    req.flash('infoSubmit', "Recipe Submitted Successfully");
+
     res.redirect("submit-recipe");
   } catch (error) {
     req.flash('infoErrors', "Error: " + error.message);
@@ -258,12 +269,46 @@ async function deleteReceipeData(id) {
   try {
     await Recipe.findByIdAndDelete(id);
   } catch (error) {
-    res.status(500).send({ message: error.message || "Something went wrong" });
+    console.log(error);
   }
 
 }
 
+async function updateReceipeData(id, req, res) {
+  try {
 
+    if (req.body.newImage == "1") {
+      console.log(req.files);
+      if (!req.files || Object.keys(req.files).length === 0) {
+
+      } else {
+        imageUploadFile = req.files.image;
+        newImageName = Date.now() + imageUploadFile.name;
+        uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+        imageUploadFile.mv(uploadPath, function (err) {
+          if (err) {
+            return res.status(500).send(err);
+          }
+        })
+      }
+      await Recipe.findByIdAndUpdate(id, {
+        image: newImageName
+      })
+    }
+
+    await Recipe.findByIdAndUpdate(id, {
+      name: req.body.name,
+      description: req.body.description,
+      email: req.body.email,
+      ingredients: req.body.ingredients,
+      category: req.body.category
+
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // async function insertDymmyRecipeData() {
 //   try {

@@ -1,5 +1,5 @@
 <div class="px-4 py-5 my-5 text-center">
-  <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+  <h1 class="display-5 fw-bold"><% if(recipe != null) { %><%= "Update" %><% } else { %><%= "Submit" %><% } %> Your Recipe</h1>
   <div class="col-lg-6 mx-auto">
     <p class="lead mb-4">
       Share your recipe with the world! Fill our form and get statred!
@@ -19,11 +19,23 @@
       <div class="row g-3">
         <div class="col-12">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" />
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            value="<% if(recipe != null) { %><%= recipe.email %><% } %>"
+            name="email"
+          />
         </div>
         <div class="col-12">
           <label for="email" class="form-label">Recipe Name</label>
-          <input type="text" class="form-control" id="name" name="name" />
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            value="<% if(recipe != null) { %><%= recipe.name %><% } %>"
+            name="name"
+          />
         </div>
         <div class="col-12">
           <label for="email" class="form-label">Description</label>
@@ -31,15 +43,19 @@
             name="description"
             id="description"
             cols="30"
-            rows="4"
+            rows="10"
             class="form-control"
-          ></textarea>
+          ><% if(recipe != null) { %><%= recipe.description %><% } %></textarea
+          >
         </div>
 
         <div class="col-12">
           <label for="email" class="form-label">Ingredients</label><br />
           <small>Example: Water</small>
-          <div class="ingredeintsList">
+          <div
+            class="ingredeintsList"
+            data-ingredeint="<% if(recipe != null) { %><%= recipe.ingredients %><% } %>"
+          >
             <div class="ingredeintDiv mb-1">
               <input
                 type="text"
@@ -54,14 +70,14 @@
         <div class="col-12">
           <button
             type="button"
-            class="btn btn-outline-primary"
+            class="btn btn-outline-primary my-2"
             id="addIngredientsBtn"
           >
             + Ingredients
           </button>
           <button
             type="button"
-            class="btn btn-outline-danger"
+            class="btn btn-outline-danger my-2"
             id="removeIngredientsBtn"
           >
             - Ingredients
@@ -71,35 +87,80 @@
           <label for="category" class="form-label">Select a Category</label>
           <select class="form-select" id="category" name="category">
             <option selected>Select a Category</option>
-            <option value="American">American</option>
-            <option value="Thai">Thai</option>
-            <option value="Indian">Indian</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Mexican">Mexican</option>
+            <option value="American" <%= recipe != null && recipe.category === 'American' ? 'selected' : '' %>>American</option>
+            <option value="Thai" <%= recipe != null && recipe.category === 'Thai' ? 'selected' : '' %>>Thai</option>
+            <option value="Indian" <%= recipe != null && recipe.category === 'Indian' ? 'selected' : '' %>>Indian</option>
+            <option value="Chinese" <%= recipe != null && recipe.category === 'Chinese' ? 'selected' : '' %>>Chinese</option>
+            <option value="Mexican" <%= recipe != null && recipe.category === 'Mexican' ? 'selected' : '' %>>Mexican</option>
           </select>
         </div>
 
         <div class="col-12">
           <label for="image">Product Image</label>
+          <% if(recipe != null) {  %>
+        <div class="col-12 col-md-4" id="imagePreview">
+            <div class="position-relative">
+                <img
+              src="/uploads/<%= recipe.image %>"
+              class="img-fluid rounded"
+              alt="<%= recipe.name %>"
+              loading="lazy"
+            />
+                <button type="button" class="btn-close position-absolute top-0 end-0 p-2 m-2" onclick="closeImage()" style="background-color: red;" aria-label="Close"></button>
+              </div>
+            
+          </div>
+        <% } %>
           <input
             type="file"
             class="form-control"
             id="image"
             name="image"
             accept="image/*"
+            style="display: none;"
           />
         </div>
-
+        
+        <input type="hidden" name="recipeId" id="recipeId" value="<% if(recipe != null) { %><%= recipe.id %><% } %>">
+        <input type="hidden" name="newImage" id="newImage" value="0">
         <div class="col-12">
           <button
             type="submit"
             class="btn btn-primary w-100 mt-3 mb-3"
             id="submit"
           >
-            Submit Recipe
+          <% if(recipe != null) { %><%= "Update" %><% } else { %><%= "Submit" %><% } %> Recipe
           </button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+<script>
+  let ingredeintsList = document.querySelector(".ingredeintsList");
+  let ingredeintDiv = document.querySelectorAll(".ingredeintDiv")[0];
+  let ingredients = ingredeintsList.dataset.ingredeint.split(",");
+  if (ingredients != "") {
+    for (let i = 0; i < ingredients.length; i++) {
+      let newIngredeints = ingredeintDiv.cloneNode(true);
+      let input = newIngredeints.querySelector("input");
+      input.value = ingredients[i];
+      ingredeintsList.appendChild(newIngredeints);
+    }
+    ingredeintsList.removeChild(ingredeintDiv);
+  }
+
+  function closeImage() {
+    $("#imagePreview").hide();
+    $("#image").show();
+    $("#newImage").val(1);
+  }
+
+  if($("#recipeId").val() == "") {
+    $("#image").show();
+  }
+
+
+  
+</script>
