@@ -348,9 +348,6 @@ exports.contact = async (req, res) => {
 
 exports.contactSendMail = async (req, res) => {
 
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_PASS;
-
   try {
 
     const transporter = nodemailer.createTransport({
