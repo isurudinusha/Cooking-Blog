@@ -360,10 +360,10 @@ exports.contactSendMail = async (req, res) => {
     });
 
     const mailOptions = {
-      from: req.body.email,
+      from: "contact@isurucookingblog.uk",
       to: 'isurucookingblog@gmail.com',
-      subject: 'Hello from Node.js',
-      text: 'This is the email body.'
+      subject: `Message from ${req.body.name}: ${req.body.email}`,
+      text: req.body.message
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
