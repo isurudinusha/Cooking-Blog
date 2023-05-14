@@ -15,3 +15,5 @@ removeIngredientsBtn.addEventListener("click", () => {
         ingredeintsList.removeChild(ingredeintsList.lastChild);
     }
 });
+
+

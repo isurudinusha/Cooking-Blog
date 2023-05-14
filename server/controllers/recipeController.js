@@ -28,7 +28,7 @@ exports.homepage = async (req, res) => {
       food,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -47,7 +47,7 @@ exports.exploreCategories = async (req, res) => {
       categories,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -68,7 +68,7 @@ exports.exploreRecipe = async (req, res) => {
       recipe
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -92,7 +92,7 @@ exports.exploreCategoriesById = async (req, res) => {
       categoryById,
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -113,7 +113,7 @@ exports.searchRecipe = async (req, res) => {
       recipe
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 
 
@@ -137,7 +137,7 @@ exports.exploreLatest = async (req, res) => {
       recipe
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -160,7 +160,7 @@ exports.randomRecipe = async (req, res) => {
       recipe
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -185,7 +185,7 @@ exports.submitRecipe = async (req, res) => {
       infoSubmitObj
     });
   } catch (error) {
-    res.satus(500).send({ message: error.message || "Something went wrong" });
+    res.status(500).send({ message: error.message || "Something went wrong" });
   }
 };
 
@@ -236,6 +236,32 @@ exports.submitRecipeOnPost = async (req, res) => {
 
 
 };
+
+
+/**
+ * GET /delete-recipe
+ * Delete Recipe
+ */
+
+
+exports.deleteRecipe = async (req, res) => {
+  try {
+    let id = req.params.id;
+    await deleteReceipeData(id);
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Something went wrong" });
+  }
+};
+
+
+async function deleteReceipeData(id) {
+  try {
+    await Recipe.findByIdAndDelete(id);
+  } catch (error) {
+    res.status(500).send({ message: error.message || "Something went wrong" });
+  }
+
+}
 
 
 
