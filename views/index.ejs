@@ -70,10 +70,7 @@
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.latest.forEach(function (recipe, i) { %>
     <a href="/recipe/<%= recipe._id %>" class="col text category__link">
-      <div
-        class="category__img category__img--large shadow"
-        data-aos="flip-left"
-      >
+      <div class="category__img category__img--large shadow" data-aos="fade-in">
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
@@ -98,10 +95,7 @@
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.thai.forEach(function (recipe, i) { %>
     <a href="/recipe/<%= recipe._id %>" class="col text category__link">
-      <div
-        class="category__img category__img--large shadow"
-        data-aos="flip-right"
-      >
+      <div class="category__img category__img--large shadow" data-aos="fade-in">
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
@@ -126,10 +120,7 @@
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.chinese.forEach(function (recipe, i) { %>
     <a href="/recipe/<%= recipe._id %>" class="col text category__link">
-      <div
-        class="category__img category__img--large shadow"
-        data-aos="flip-left"
-      >
+      <div class="category__img category__img--large shadow" data-aos="fade-in">
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
@@ -154,10 +145,7 @@
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (food != '') { %> <% food.american.forEach(function (recipe, i) { %>
     <a href="/recipe/<%= recipe._id %>" class="col text category__link">
-      <div
-        class="category__img category__img--large shadow"
-        data-aos="flip-right"
-      >
+      <div class="category__img category__img--large shadow" data-aos="fade-in">
         <img
           src="/uploads/<%= recipe.image %>"
           alt="<%= recipe.name %>"
