@@ -242,7 +242,7 @@ exports.submitRecipeOnPost = async (req, res) => {
   } catch (error) {
     // if error message contains "Upload"
     if (error.message.includes("Upload")) {
-      req.flash('infoErrors', "Error: No product image were uploaded.");
+      req.flash('infoErrors', "Error: No product image was uploaded.");
     } else {
       req.flash('infoErrors', "Error: " + error.message);
     }
