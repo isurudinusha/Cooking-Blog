@@ -205,7 +205,8 @@ exports.submitRecipeOnPost = async (req, res) => {
 
     if (req.body.recipeId == "") {
       if (!req.files || Object.keys(req.files).length === 0) {
-        return res.status(400).send('No product image were uploaded.');
+        return res.status(200).send(Upload);
+
       } else {
         imageUploadFile = req.files.image;
         newImageName = Date.now() + imageUploadFile.name;
@@ -239,7 +240,12 @@ exports.submitRecipeOnPost = async (req, res) => {
 
     res.redirect("submit-recipe");
   } catch (error) {
-    req.flash('infoErrors', "Error: " + error.message);
+    // if error message contains "Upload"
+    if (error.message.includes("Upload")) {
+      req.flash('infoErrors', "Error: No product image were uploaded.");
+    } else {
+      req.flash('infoErrors', "Error: " + error.message);
+    }
     res.redirect("submit-recipe");
   }
 
