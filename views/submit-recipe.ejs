@@ -25,6 +25,7 @@
             id="email"
             value="<% if(recipe != null) { %><%= recipe.email %><% } %>"
             name="email"
+            required
           />
         </div>
         <div class="col-12">
@@ -35,6 +36,7 @@
             id="name"
             value="<% if(recipe != null) { %><%= recipe.name %><% } %>"
             name="name"
+            required
           />
         </div>
         <div class="col-12">
@@ -45,6 +47,7 @@
             cols="30"
             rows="10"
             class="form-control"
+            required
           ><% if(recipe != null) { %><%= recipe.description %><% } %></textarea
           >
         </div>
@@ -62,6 +65,7 @@
                 class="form-control"
                 id="ingredients"
                 name="ingredients"
+                required
               />
             </div>
           </div>
@@ -85,7 +89,7 @@
         </div>
         <div class="col-12">
           <label for="category" class="form-label">Select a Category</label>
-          <select class="form-select" id="category" name="category">
+          <select class="form-select" id="category" name="category" required>
             <option selected>Select a Category</option>
             <option value="American" <%= recipe != null && recipe.category === 'American' ? 'selected' : '' %>>American</option>
             <option value="Thai" <%= recipe != null && recipe.category === 'Thai' ? 'selected' : '' %>>Thai</option>
