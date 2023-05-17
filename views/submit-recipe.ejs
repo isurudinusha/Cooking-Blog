@@ -18,9 +18,9 @@
     <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
       <div class="row g-3">
         <div class="col-12">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Your Full Name</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
             id="email"
             value="<% if(recipe != null) { %><%= recipe.email %><% } %>"
